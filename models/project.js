@@ -14,11 +14,30 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Project.init({
-    name: DataTypes.STRING,
-    profileId: DataTypes.INTEGER,
-    github: DataTypes.STRING,
-    app: DataTypes.STRING,
-    picture: DataTypes.STRING
+    name: {
+      type:DataTypes.STRING,
+      allowNull: false,
+      onDelete: 'CASCADE'},
+    profileId:{
+      type:DataTypes.STRING,
+      allowNull: false,
+      onDelete: 'CASCADE',
+      references:{
+        model: 'Profiles',
+        key:'id'
+      }},
+    github: {
+      type:DataTypes.STRING,
+      allowNull: false,
+      onDelete: 'CASCADE'},
+    app: {
+      type:DataTypes.STRING,
+      allowNull: false,
+      onDelete: 'CASCADE'},
+    picture: {
+      type:DataTypes.STRING,
+      allowNull: false,
+      onDelete: 'CASCADE'}
   }, {
     sequelize,
     modelName: 'Project',
