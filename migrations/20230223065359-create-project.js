@@ -10,19 +10,33 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
+        onDelete: 'CASCADE'
       },
       profileId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        onDelete: 'CASCADE',
+        references:{
+          model: 'Profiles',
+          key:'id'
+        }
       },
       github: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
+        onDelete: 'CASCADE'
       },
       app: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
+        onDelete: 'CASCADE'
       },
       picture: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
+        onDelete: 'CASCADE'
       },
       createdAt: {
         allowNull: false,
