@@ -7,6 +7,7 @@ const { decodeUserFromToken, checkAuth } = middleware
 /*---------- Public Routes ----------*/
 
 
+router.delete("/:projectId", projectCtrl.deleteProject)
 /*---------- Protected Routes ----------*/
 router.use(decodeUserFromToken)
 router.post("/", checkAuth, projectCtrl.create)

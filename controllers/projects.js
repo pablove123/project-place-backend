@@ -30,7 +30,9 @@ async function show(req,res){
 }
 async function deleteProject(req,res){
   try {
-    
+    const project = await Project.findByPk(req.params.projectId)
+    await project.destroy()
+    res.status(200).json(project)
   } catch (error) {
     res.status(500).json({ err: error })
   }
