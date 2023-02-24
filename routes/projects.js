@@ -12,6 +12,7 @@ router.use(decodeUserFromToken)
 router.post("/", checkAuth, projectCtrl.create)
 router.get("/", checkAuth, projectCtrl.index)
 router.get("/:projectId", checkAuth, projectCtrl.show)
+router.put("/:projectId", checkAuth, projectCtrl.update)
 
 
 module.exports = router

@@ -37,8 +37,16 @@ async function deleteProject(req,res){
 }
 async function update(req,res){
   try {
-    
+    const project = await Project.findByPk(req.params.projectId)
+    project.name = req.body.name
+    // project.save()
+    project.github = req.body.github
+    project.app = req.body.app
+    project.picture = req.body.picture
+    project.save()
+    res.status(200).json(project)
   } catch (error) {
+    console.log(error)
     res.status(500).json({ err: error })
   }
 }
