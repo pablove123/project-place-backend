@@ -12,7 +12,8 @@ async function create(req,res){
 }
 async function index(req,res){
   try {
-    
+    const projects = await Project.findAll()
+    res.status(200).json(projects)
   } catch (error) {
     
   }
