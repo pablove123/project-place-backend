@@ -8,12 +8,13 @@ const { decodeUserFromToken, checkAuth } = middleware
 
 
 router.delete("/:projectId", projectCtrl.deleteProject)
+router.get("/", projectCtrl.index)
 /*---------- Protected Routes ----------*/
 router.use(decodeUserFromToken)
 router.post("/", checkAuth, projectCtrl.create)
-router.get("/", checkAuth, projectCtrl.index)
 router.get("/:projectId", checkAuth, projectCtrl.show)
 router.put("/:projectId", checkAuth, projectCtrl.update)
+router.put("/:projectId/addphoto", checkAuth, projectCtrl.addPhoto)
 
 
 module.exports = router

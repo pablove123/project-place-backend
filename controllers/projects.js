@@ -6,6 +6,7 @@ async function create(req,res){
     const project = await Project.create(req.body)
     res.status(200).json(project)
   } catch (error) {
+    console.log(error)
     res.status(500).json({ err: error })
   }
 }
@@ -53,10 +54,25 @@ async function update(req,res){
   }
 }
 
+const addPhoto = async (req,res) =>{
+  try {
+    const imageFile = req.files.photo.path
+    const project = await Project.findByPk(req.params.projectId)
+    const image = await cloudinary.uploader.upload(imageFile, {tags: `projects`})
+    project.photo = image.url
+    await project.save()
+    res.status(201).json(project.photo)
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err)
+  }
+}
+
 module.exports = {
   create,
   index,
   update, 
   deleteProject,
-  show
+  show, 
+  addPhoto
 }
