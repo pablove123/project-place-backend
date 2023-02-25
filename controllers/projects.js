@@ -29,15 +29,28 @@ async function show(req,res){
     res.status(500).json({ err: error })
   }
 }
+// async function deleteProject(req,res){
+//   try {
+//     const project = await Project.findByPk(req.params.projectId)
+//     await project.destroy()
+//     res.status(200).json(project)
+//   } catch (error) {
+//     res.status(500).json({ err: error })
+//   }
+// }
 async function deleteProject(req,res){
   try {
-    const project = await Project.findByPk(req.params.projectId)
-    await project.destroy()
-    res.status(200).json(project)
+    console.log(req.params.projectName)
+    const rowsRemoved = await Project.destroy(
+      { where: { name: req.params.projectName } }
+    )
+    res.status(200).json(rowsRemoved) // Expected: 1
   } catch (error) {
     res.status(500).json({ err: error })
   }
 }
+
+
 async function update(req,res){
   try {
     const project = await Project.findByPk(req.params.projectId)
