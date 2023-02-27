@@ -1,4 +1,4 @@
-const { Project } = require('../models')
+const { Project, Profile } = require('../models')
 
 async function create(req,res){
   try {
@@ -29,15 +29,7 @@ async function show(req,res){
     res.status(500).json({ err: error })
   }
 }
-// async function deleteProject(req,res){
-//   try {
-//     const project = await Project.findByPk(req.params.projectId)
-//     await project.destroy()
-//     res.status(200).json(project)
-//   } catch (error) {
-//     res.status(500).json({ err: error })
-//   }
-// }
+
 async function deleteProject(req,res){
   try {
     console.log(req.params.projectName)
@@ -54,18 +46,39 @@ async function deleteProject(req,res){
 async function update(req,res){
   try {
     const project = await Project.findByPk(req.params.projectId)
+    console.log("this is project",project)
     project.name = req.body.name
     // project.save()
     project.github = req.body.github
     project.app = req.body.app
     project.picture = req.body.picture
-    project.save()
+    await project.save()
     res.status(200).json(project)
   } catch (error) {
     console.log(error)
     res.status(500).json({ err: error })
   }
 }
+
+// async function update(req,res){
+//   try {
+//     console.log("test")
+//     console.log(req.params.projectId)
+//     const project = await Project.findAll(
+//       { where: { id: req.params.projectId } }
+//       )
+//     console.log("This is project",project)
+//     project.name = req.body.name
+//     project.github = req.body.github
+//     project.app = req.body.app
+//     project.picture = req.body.picture
+//     project.save()
+//     res.status(200).json(project)
+//   } catch (error) {
+//     console.log(error)
+//     res.status(500).json({ err: error })
+//   }
+// }
 
 const addPhoto = async (req,res) =>{
   try {
